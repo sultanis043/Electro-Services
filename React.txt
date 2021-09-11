@@ -1,0 +1,1014 @@
+Create a New React App
+
+npx create-react-app my-app
+cd my-app
+npm start
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------
+
+Function -->
+
+export function Test() {
+    return(
+        <h1>Hello these is test function.. </h1>
+        )
+    
+}
+
+---------------------------------------------------------
+
+Class --> 
+
+import react, { Component } from 'react'
+export default class User extends Component
+{
+    render()
+    {
+        return(
+            <h1> Hello, Class User..!</h1>
+        )
+    }
+}
+
+----------------------------------------------------
+
+state--> state is an object, use to store data.
+The state object is where you store property values that belongs to the component.
+
+When the state object changes, the component re-renders.
+State in Function.
+function App() {
+  const [data,setData]=useState(0) 
+  function updateData()
+  {
+    setData(data+1);
+    // alert();
+  }
+  return (
+    <div className="App">
+        <h1> {data} </h1>
+        <button onClick= {updateData}> Click Me </button>
+    </div>
+  );
+}
+
+------------------------------------------------------------
+State in Class: -
+
+Class App extends component{
+constractor()
+{
+super();
+this.state={
+data:"sultan"
+}
+}
+apple()
+{
+	this.setState({data:"salahuddin"})
+}
+render()
+{
+	return(
+		<div className="App">
+		<h1>{this.state.data}</h1>
+		<button onClick = {() => this.apple() }> Click Me </button>
+		</div>
+);
+
+}
+}
+
+---------------------------------------------------
+
+Props in Function => its a parameters. we use props to pass values from one component to Other componenets, we can change props
+	values in sender component not in receiver compnent.
+
+function Stundent(props)
+{
+	return(
+	<div>
+	<h1>Hello : {props.name}</h1>
+	<h2>Email : {props.email}</h2>
+	);
+}
+export default Student
+======>
+import Student from './file_name';
+
+<Student name= {"shariqha"} email= { shariqha@test.com}/>
+=======>
+passing props on Click.==>
+-----------------------------------
+
+function App()
+    {
+      const [name, setName] = useState("Sultan")
+      return (
+        <div className="App">
+      <h1> Props in React :) </h1>
+      <Student name= {name} Email= {"sultanis043@gmail.com"}/>
+      <Student name= {"Adeeba"} Email = {"adeeba@test.com"}/>
+      <Student name= {"Talbiya"} Email = {"talbiya@test.com"}/>
+      <Student name= {"Zainab"} Email = {"Zainab@test.com"}/>
+      <button  onClick= {() => {setName("Salahuddin")}}>Update Name</button>
+      </div>  
+      );
+    }
+
+
+----------------------------------------------------------------
+Get Input Value from box. =>
+
+function App()
+{
+  const [data, setData]=useState("Type your comment here")
+  const [print, setPrint]=useState(false)
+
+  function getData(val)
+  {
+    console.log(val.target.value);
+    setData(val.target.value)
+    setPrint(false) // To hide data make setPrint false.//
+  }
+  return(
+    <div className= "App">
+      {
+        print?
+        <h1> {data}</h1>
+        :null
+      }
+      <input type= "text" onChange= {getData}></input>
+      <button onClick= {()=> setPrint(true)}> Update me </button >
+
+    </div>
+  );
+}
+
+------------------------------------------------------------------------
+Hide and Show Elements.
+
+function App()
+{
+  const [status, setStatus]=useState(ture)
+  return(
+    <div className= "App">
+      {
+        status?
+        <h1> Hello World..!</h1>
+        :null
+      }
+	
+      <button onClick= {()=> setStatus(false)}> Hide </button >
+      <button onClick= {()=> setStatus(true)}> Show </button >
+
+    </div>
+  );
+}
+
+=======> 
+For Toggle : Just make status Opposite.
+
+ <button onClick= {()=> setStatus(!status)}>Toggle</button>
+  
+--------------------------------------------------------------------------
+
+Handle Form data and print ==>
+
+function App() {
+  const [name,setName]=useState();
+  const [interest,setInterest]=useState("");
+  const [tnc,setTnc]=useState(false);
+  function getFormData(e)
+  {
+    console.log(name, interest,tnc);
+    e.preventDefault()
+  }
+
+  return(
+    <div className="App">
+      <h1> Handle Form Data</h1>
+      <form onSubmit={getFormData}>
+        <input type="text" placeholder=" Enter your Name" value= {name} onChange={(e)=>setName(e.target.value)}/>
+        <br/><br/>
+        <select onChange={(e)=>setInterest(e.target.value)}>
+          <option >School</option>
+          <option> College</option>
+          <option> Degree</option>
+        </select><br/>
+        <input type= "checkbox" onChange={(e)=>setTnc(e.target.checked)}/>
+        <span>Accept Terms and Condition </span>
+        <br/><br/>
+        <button type= "submit"> Submit</button>
+        <button> Clear</button>
+      </form>
+    </div>
+  )
+  
+}
+
+export default App
+
+-----------------------------------------------------------------------------------
+
+if / else in React ==>
+
+import {useState} from 'react';
+function Profile(){
+
+    const [loggedIn,setLoggedIn]=useState(true)
+        return(
+            <div>
+                {loggedIn? <h1> Welcome Sultan</h1>:<h1> Welcome Guest</h1>   }
+            </div>
+        )
+}
+
+export default Profile;
+
+=======>
+Also we can use
+
+const [loggedIn,setLoggedIn]=useState(1)
+        return(
+            <div>
+                {loggedIn==1? 
+                <h1> Welcome Sultan</h1>
+                :loggedIn==2?
+                <h1> Welcome User 2</h1>
+                :loggedIn==3?
+                <h1> Welcome Guest 3 </h1> 
+                :<h1> Welcome Guest 4</h1>  }
+            </div>
+        )
+
+----------------------------------------------------------------
+
+passing Function as props ==>
+
+Parent Function===>
+
+function App() {
+  function getData()
+  {
+    alert("Thanks You,Welcome Again.")
+  }
+  return(
+    <div className="App">
+     <h1> Passing function as props. in Components..!</h1>
+     <User data={getData}/>
+    </div>
+  )
+  
+}
+======> Child Function :
+function User(props)
+{
+    return(
+        <div>
+            <h1>      Hello world..!      </h1>
+            <button onClick={props.data}>Click Here to Finish.</button>
+        </div>
+    )
+}
+export default User;
+
+----------------------------------------------------------------------------------
+Life Cycle Method.==> There are many life cycle method
+
+There are 3 phases =>
+1)Mounting,	{componentDidMount, ..........}
+2)Updating and	{componentDidUpdate, ........}
+3)Unmounting.	{ComponentWillUnmount, .......}
+
+When Life Cycle Method Run==>
+
+*When Component is loaded.
+*when component is update with state and props.
+* when Component is removed.
+
+
+------------------------------------------------------------------------------
+
+Constructor - Life Cycle Method. ==>
+
+
+
+
+------------------------------------------------------------------------------------
+componentDidMount ==>
+
+
+
+
+-------------------------------------------------------------------------------------
+componentDidUpdate ==>
+
+
+
+
+
+--------------------------------------------------------------------------------------
+componentDidUnmount ==>
+
+
+
+
+---------------------------------------------------------------------------------------
+shouldComponentUpdate ==>
+
+
+
+---------------------------------------------------------------------------------------
+componentDidUnmount ==>
+
+
+
+
+-----------------------------------------------------------------------------------------
+
+Hooks ==>
+
+To use features like State, Life Cycle, pure Component, etc.. in Functional Component We use HOOKS.
+
+Hooks are :
+*useState
+*useEffect
+*useRef
+	ect...
+
+note: We cannot use hooks in Class Components.
+-----------------------------------------------------------------------------------------
+useEffect ==> use as life cycle method in function.
+
+import {useEffect} from 'react';
+
+function App() {
+  const [count,setCount]=useState(0)
+  useEffect(() => {
+    console.warn(" UseEffect..")
+  },)
+  return(
+    <div className="App">
+     <h1> Hooks..! {count}</h1>
+     <button onClick= {()=>setCount(count+1)}> Update Here </button>
+    </div>
+  )
+}
+
+=======================================================================
+useEffect On State ==> 
+
+function App() {
+  const [data,setData]=useState(10)
+  const [count,setCount]=useState(100)
+  useEffect(() => {
+    console.warn(" UseEffect..")
+  },[data])
+  useEffect(() => {
+    console.warn(" UseEffect..000")
+  },[count])
+  return(
+    <div className="App">
+     <h1> Hooks..! {count}</h1>
+     <h1> Hooks..! {data}</h1>
+     <button onClick= {()=>setCount(count+1)}> Update Count Here </button><br/>
+     <button onClick= {()=>setData(data+1)}> Update Data Here </button>
+
+    </div>
+  )
+}
+
+export default App
+
+================================================================
+What are the React components?
+Components are independent and reusable bits of code. They serve the same purpose as JavaScript functions, but work in isolation and return HTML via a render() function. Components come in two types, Class components and Function components.
+
+=================================================================
+useEffect on props ==> 
+
+Parent Component=>
+
+function App() {
+  const [data,setData]=useState(10);
+  const [count,setCount]=useState(100);
+
+  return(
+    <div className="App">
+     <User count={count} data={data} />
+     <button onClick= {()=>setCount(count+1)}> Update Count Here </button><br/>
+     <button onClick= {()=>setData(data+1)}> Update Data Here </button>
+    </div>
+  )
+}
+
+export default App
+------------------
+Child Component=>
+
+import './App.css';
+import React, { useEffect,useState} from 'react';
+function App(props) {
+  useEffect(() => {
+    console.warn(" UseEffect..1111")
+  })
+  return (
+    <div className="App">
+            <h1> Hooks..! : {props.count}</h1>
+     <h1> Hooks..! : {props.data}</h1>
+    </div>
+  );
+}
+export default App;
+
+--------------------------------------------------------------------------------------------------
+Style in React==>
+
+type 1 ==>	<h1 className="primary"> Style Type 1 in React.... </h1>
+type 2 ==>	<h1 style={{backgroundColor:"black", color:'red'}}> Style Type 2 in React.... </h1>
+type 3 ==>	<h1 className={style.success}> Style Type 3 in React.... </h1>
+
+----------------------------------------------------------------------------------------------------
+
+Bootstrap ==>
+
+npm install react-bootstrap bootstrap
+
+-------------------------------------------------------------------------------------------------------
+
+Handling Array ==> Map Function 
+
+function App() {
+  const students =[
+    {name:'Shariqha',email: 'Shariqha@test.com',contact: 221},
+    {name:'Sufiya',email: 'Sufiya@test.com',contact: 123},
+    {name:'Zakriya',email: 'Zakriya@test.com',contact: 345},
+    {name:'Nizam',email: 'Nizam@test.com',contact: 567},
+  ];
+  return (
+    <div className="App">
+      <h1>Handle Array with map()..!</h1>
+      <table border= "1">
+      <tr>
+        <td> Name </td>
+        <td> Email </td>
+        <td> Contact </td>
+        </tr>
+      {
+        students.map((key)=>
+        <tr>
+        <td>{key.name}</td>
+        <td>{key.email}</td>
+        <td>{key.contact}</td>
+        </tr>
+        )
+      }
+      </table>
+
+    </div>
+
+  );
+}
+
+export default App;
+
+
+------------------------------------------------------------------------
+Nasted map using Bootstrap ==> 
+function App() {
+  const students =[
+    {name:'Shariqha',email: 'Shariqha@test.com',contact: 221, address: [
+      {hn:"423", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+      {hn:"434", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+      {hn:"4245", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+      {hn:"4237", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+
+    ]},
+    {name:'Sufiya',email: 'Sufiya@test.com',contact: 123,address:[
+      {hn:"423", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+      {hn:"4235", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+      {hn:"4236", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+      {hn:"423", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+    ]},
+    {name:'Zakriya',email: 'Zakriya@test.com',contact: 345,address:[
+      {hn:"4236", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+      {hn:"4237", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+      {hn:"4234", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+      {hn:"4233", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+    ]},
+    {name:'Nizam',email: 'Nizam@test.com',contact: 123,address:[
+      {hn:"4232", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+      {hn:"4232", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+      {hn:"4231", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+      {hn:"4236", landMark:"Madeena masjid", city:"Bangalore", country:"india"},
+    ]},
+  ];
+  return (
+    <div className="App">
+      <h1>Handle Array with Bootstrap..!</h1>
+      <Table striped bordered hover >
+        <tbody>
+      <tr>
+        <td>Sl.No</td>
+        <td> Name </td>
+        <td> Email </td>
+        <td> Contact </td>
+        </tr>
+      {
+        students.map((data,i)=>
+        <tr key={i}>
+          <td>{i+1}</td>
+        <td>  {data.name}</td>
+        <td> {data.email}</td>
+        <td> {data.contact}</td>
+        <td> 
+          <Table>
+            <tbody>
+              {
+                data.address.map((item)=>
+                <tr>
+                  <td>{item.hn}</td>
+                  <td>{item.landMark}</td>
+                  <td>{item.city}</td>
+                  <td>{item.country}</td>
+
+                </tr>
+                )
+              }
+            </tbody>
+          </Table>
+        </td>
+
+        </tr>
+        )
+      }
+      </tbody>
+      </Table>
+
+    </div>
+
+  );
+}
+export default App;
+
+--------------------------------------------------------------------------------------
+Reuse Components==>
+
+parent map()=>
+
+{
+      users.map((item,i)=>
+      <User data={item}/>
+      )
+}
+===================>
+child function() ==>
+
+function User(props)
+{
+    return(
+        <div>
+        <span> {props.data.name} </span>
+        <span> {props.data.email} </span>
+        <span> {props.data.contact} </span>
+        </div>
+
+    )
+}
+export default User;
+
+--------------------------------------------------------------------------------------
+React Fragment==>
+
+Used to handle multiple elements / components to wrap .
+
+<>
+.
+.
+</>
+
+----------------------------------------------------------------------------------------
+Lefting State Up (Sending data from Child to Parent)
+
+Parent Component==> 
+
+function App() {
+  function parentAlert(data)
+  {
+    console.log(data)
+    alert(data.name);
+  }
+  return(
+    <div className="App">
+    <h1> Left State Up...!</h1>
+    <User test={parentAlert}/>
+    </div>
+  );
+}
+export default App;
+
+===================
+Child Componet ==>
+
+function User(props)
+{
+    const data = { name:"Sultan Salahuddin", email:"sultanis43@gmail.com" }
+    return(
+        <div>
+        <h3>My Name : {data.name}</h3>
+        <button onClick= {()=>props.test(data)}>Click Me</button>
+        </div>
+
+    )
+}
+export default User;
+
+---------------------------------------------------------------------------------------
+
+Pure Component ==>
+It stop Re-render same function multiple time, if ther is no Change State.
+
+
+import react, {PureComponent} from 'react';
+---------------------------------------------------------------------------------------
+
+useMemo => (Hook in Reactjs)
+
+It stop Re-render same function multiple time, if ther is no Change State.
+
+Syntex : useMemo(() => function, input)
+
+import {useState, useMemo} from "react";
+function App() {
+  const [count,setCount]=useState(0);
+  const [item, setItem]=useState(10); 
+  const multiCountMemo =useMemo(function multiCountMemo() {
+    console.log("multiCount")
+    return count *2
+  }, [count])
+  return(
+    <div className="App">
+    <h1> useMemo...!</h1>
+    <h2>Count : {count}</h2>
+    <h2>Item : {item}</h2>
+    <h2>{multiCountMemo}</h2>
+    <button onClick= {()=>setCount(count+1)}>Update Count</button>
+    <button onClick= {()=>setItem(item*2)}>Update Items</button>
+
+    </div>
+  );
+}
+export default App;
+
+--------------------------------------------------------------------------------------------
+Ref ==> Use to manupilate Dom.
+
+In Class==> 
+
+import {createRef} from "react";
+class App extends React.Component {
+  constructor()
+  {
+    super();
+    this.nameRef=createRef();
+  }
+  getVal()
+  {
+    this.nameRef.current.style.color="red";
+    this.nameRef.current.style.backgroundColor='blue';
+    console.log(this.nameRef.current.value)
+  }
+  render()
+  {
+    return(
+      <div className="App">
+      <h1> Use of Ref...!</h1>
+      <input type="text" ref = {this.nameRef}/>
+      <button onClick={()=>this.getVal()}>Update Items</button>
+  
+      </div>
+    );
+  }
+  
+}
+
+export default App;
+
+-------------------------------------------------------------------------------------------
+useRef (Hook)==>
+
+import React, {useRef} from "react";
+function App() {
+  const nameRef = useRef(null)
+  function getVal()
+  {
+    nameRef.current.style.color="red";
+    nameRef.current.style.backgroundColor='blue';
+    nameRef.current.focus();
+    console.log(nameRef.current.value);
+  }
+
+
+    return(
+      <div className="App">
+      <h1> Use of Ref...!</h1>
+      <input type="text" ref = {nameRef}/>
+      <button onClick={()=>getVal()}>Update Items</button>
+  
+      </div>
+    );
+  
+}
+export default App;
+
+-----------------------------------------------------------------------------------------
+
+forwordRef ==>
+
+Parent Component
+import React, {useRef} from "react";
+import User from './User';
+function App() {
+  const nameRef = useRef()
+  function getVal()
+  {
+    
+    nameRef.current.style.color="red";
+    nameRef.current.style.backgroundColor='blue';
+    nameRef.current.focus();
+    console.log(nameRef.current.value);
+  }
+    return(
+      <div className="App">
+      <h1> Use of ForwordRef...!</h1>
+      <User ref={nameRef}/>
+      <button onClick={()=>getVal()}>Update Items</button>
+  
+      </div>
+    );
+  
+}
+export default App;
+=====================
+
+Child Component
+
+import React, {forwardRef} from 'react';
+function User(props,eff)
+{
+    return(
+        <div>
+            <input type="text" ref= {eff}></input>
+        </div>
+    )
+}
+export default forwardRef(User);
+
+-----------------------------------------------------------------------------------------
+Controlled Component ==> Components Control by React using State.
+
+import React, {useState} from "react";
+function App() {
+  const [Val, setVal] = useState("")
+  
+    return(
+      <div className="App">
+      <h1> Control Components...!</h1>
+      <input type= "text" defaultValue= "000" onChange= {(e)=> setVal(e.target.value)}></input>
+      <h1> Value : {Val}</h1>
+      </div>
+    );
+}
+export default App;
+
+-------------------------------------------------------------------------------------------
+Uncontrolled Components ==> Components controlled by direct Dom or JavaScript.
+
+
+
+------------------------------------------------------------------------------------------
+
+HOC-(High Order Component) ==> Is Component which take input as component and provide Output as component.
+ 
+
+--------------------------------------------------------------------------------------------
+Routing ==> React Router is a standard library for routing in React. It enables the navigation among views of various components in a React Application, allows changing the browser URL, and keeps the UI in sync with the URL.
+
+import {BrowserRouter, Link, Route} from 'react-router-dom'
+function App() {
+  
+    return(
+      <div className="App">
+        <BrowserRouter>
+        <Link to= "/Home"> Home Pages</Link> <br/>
+        <Link to="/ABout"> About Pages</Link>
+        <Route path= "/Home"> <Home/></Route>
+        <Route path= "/About"> <About/></Route>
+        </BrowserRouter>
+      </div>
+    );
+}
+export default App;
+
+function Home()
+{
+  return(
+    <div>
+      <h1>Home Page</h1>
+      <p> Welcome to the Home page, </p>
+    </div>
+  )
+}
+
+
+function About()
+{
+  return(
+    <div>
+      <h1>About Page</h1>
+      <p> Welcome to the About page, </p>
+    </div>
+  )
+}
+
+--------------------------------------------------------------------------------------
+ 404 Page==>
+
+<Route path= "*"> <PageNotFound /></Route>
+
+=======>
+function PageNotFound() {
+  return (
+    <div>
+      <h1>404 Not Found</h1>
+      <p> This Page Not Found </p>
+    </div>
+  );
+}
+export default PageNotFound;
+
+--------------------------------------------------------------------------------------
+
+Dynamic Routing ==>
+
+
+
+
+-------------------------------------------------------------------------------------
+Postman ==> Tool to test API.
+
+
+
+-------------------------------------------------------------------------------------
+
+API => Application programming Interface
+
+Get Method --> To get the data from Date base.
+Post Method --> To store data in Data base.
+Put Motheod --> To update data in Data base.
+Delete Method --> To delete Data from Data base.
+
+--------------------------------------------------------------------------------------
+
+Get Method ==>To get data from Data base.			postman
+							select GET, place url
+fetch("url").then((result)=>{				select BODY, -> raw -> JSON 
+result.json().then((resp)=>{
+setDate(resp)
+})
+}),[ ])
+
+
+it will get data from Url pass to result, then result.json() will convert it to json form, then it will pass as a resp(response). then resp to setData to access in compound.
+---------------------------------------------------------------------------------------
+POST Method ==> it is use to store data in data base.
+
+
+import React from "react";
+import "./styles.css";
+import {useState} from 'react';
+
+export default function App() {
+  const [name,setName]=useState("");
+  const [email,setEmail]=useState("");
+  const [number,setNumber]=useState("")
+  function saveUser(){
+    console.warn({name,email,number});
+    let data={name,email,number};
+    fetch("",{
+      method:'POST',
+      headers:{
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then((result)=>{
+      //console.warn("result",result);
+      result.json().then((resp)=>{
+      //console.warn("resp",resp);
+      })
+    })
+  }
+  
+  return (
+    <div className="App">
+      <h1>POST METHOD</h1>
+      <input type="text" value={name} onChange={(e)=>{setName(e.target.value)}} name="name"/> <br/> <br/>
+      <input type="text" value={email} onChange={(e)=>{setEmail(e.target.value)}} name="email"/> <br/> <br/>
+      <input type="text" value={number} onChange={(e)=>{setNumber(e.target.value)}} name="number" /> <br/> <br/>
+      <button type="button" onClick={saveUser}> Save User </button>
+    </div>
+  );
+}
+
+---------------------------------------------------------------------------------------
+Delete Method ==>
+
+fetch(`url/${id}`,
+		{method:'DELETE'}).then((result)=>{
+		result.json().then((resp)=>{
+	console.warn("resp",resp)
+	})
+})
+}
+
+
+---------------------------------------------------------------------------------------
+Pre-fill Form ==>
+
+
+
+---------------------------------------------------------------------------------------
+Put Method ==>
+
+
+
+---------------------------------------------------------------------------------------
+Previous State ==>
+
+
+
+--------------------------------------------------------------------------------------
+Previouse Prpos with hook ==>
+
+
+
+----------------------------------------------------------------------------------------
+Context API ==>
+
+Provider
+Consumer
+
+
+---------------------------------------------------------------------------------------
+let a=[1,2,3];
+a.x="foo";
+let b="";
+for(i of a)
+{
+b += i;
+}
+
+console.log(b);
+
+
+let x={
+m:42,
+f:function(){
+let a =[1,2,3];
+let str ="";
+a.forEach(e=>{str =+this.m;});
+return str;
+},
+};
+console.log(x.f());
+
+
+
+
+=================================================
+ for data ->
+
+https://api.punkapi.com/v2/beers?page=2&per_page=8
+
+
+
+
+
+
+
+
+
+
+
+
